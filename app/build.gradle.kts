@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
-
-
+    id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -106,11 +106,13 @@ dependencies {
     //lifecycle
     val lifecycle_version = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
-    //material design extended
-    implementation("androidx.compose.material:material-icons-extended-android:1.6.6")
     //swipe refreshlayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
+    //navigation dependency
+    val nav_version = "2.7.7"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+    // Jetpack Compose Integration
+    implementation("androidx.compose.material:material-icons-extended-android:1.5.4")
 
 
 
