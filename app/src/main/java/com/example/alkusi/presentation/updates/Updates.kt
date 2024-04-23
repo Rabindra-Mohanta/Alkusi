@@ -1,11 +1,10 @@
-package com.example.alkusi.presentation.more
+package com.example.alkusi.presentation.updates
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MoreScreen()
+fun Updates()
 {
-    Text(text = "More")
-
+    Text(text = "Updates")
 }

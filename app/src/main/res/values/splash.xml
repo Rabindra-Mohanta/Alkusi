@@ -2,7 +2,7 @@
 <resources>
     <style name="App.Starting.Theme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#FFFFFF</item>
-        <item name="windowSplashScreenAnimatedIcon">#D32F2F</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_background</item>
         <item name="postSplashScreenTheme">@style/Theme.Alkusi</item>
     </style>
 </resources>

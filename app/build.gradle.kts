@@ -30,6 +30,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+        }
+
+        debug {
+
         }
     }
     compileOptions {
@@ -113,6 +118,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     // Jetpack Compose Integration
     implementation("androidx.compose.material:material-icons-extended-android:1.5.4")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
 
 
 
