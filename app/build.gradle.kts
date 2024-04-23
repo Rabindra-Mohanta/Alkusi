@@ -9,7 +9,6 @@ plugins {
 android {
     namespace = "com.example.alkusi"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.example.alkusi"
         minSdk = 24
@@ -30,12 +29,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://rickandmortyapi.com\"")
 
         }
-
         debug {
-
+            buildConfigField("String", "BASE_URL", "\"https://rickandmortyapi.com\"")
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -46,6 +46,8 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -76,7 +78,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Optional - Integration with activities
-    implementation ("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.activity:activity-compose:1.9.0")
     //splash screen
     implementation("androidx.core:core-splashscreen:1.0.0")
     //data store
@@ -119,7 +121,6 @@ dependencies {
     // Jetpack Compose Integration
     implementation("androidx.compose.material:material-icons-extended-android:1.5.4")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
-
 
 
 }
