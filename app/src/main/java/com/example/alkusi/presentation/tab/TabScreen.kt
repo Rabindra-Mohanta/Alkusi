@@ -1,6 +1,9 @@
 package com.example.alkusi.presentation.tab
-
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Chat
@@ -18,22 +21,20 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import com.example.alkusi.presentation.calls.Calls
 import com.example.alkusi.presentation.chats.Chats
 import com.example.alkusi.presentation.communities.Communities
 import com.example.alkusi.presentation.updates.Updates
-import com.example.alkusi.util.Constants.ZERO_INT
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun TabScreen() {
-    var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(ZERO_INT)
-    }
+    val pagerState = rememberPagerState(pageCount = { 4 })
+    val scope = rememberCoroutineScope()
     val items = listOf(
         TabItem(
             title = "Chats",
@@ -64,8 +65,8 @@ fun TabScreen() {
         NavigationBar {
             items.forEachIndexed { index, item ->
                 NavigationBarItem(
-                    selected = selectedItemIndex == index,
-                    onClick = { selectedItemIndex = index },
+                    selected = pagerState.currentPage == index,
+                    onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
                     label = {
                         Text(
                             text = item.title
@@ -82,7 +83,7 @@ fun TabScreen() {
                         })
                         {
                             Icon(
-                                imageVector = if (index == selectedItemIndex) item.selectedIcon else item.unselectedIcon,
+                                imageVector = if (index == pagerState.currentPage) item.selectedIcon else item.unselectedIcon,
                                 contentDescription = item.title
                             )
                         }
@@ -90,16 +91,15 @@ fun TabScreen() {
             }
         }
     }) {
-
-        when (selectedItemIndex) {
-            0 -> Chats()
-            1 -> Updates()
-            2 -> Communities()
-            3 -> Calls()
-            else -> Chats()
+        HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) {
+            when (it) {
+                0 -> Chats()
+                1 -> Updates()
+                2 -> Communities()
+                3 -> Calls()
+                else -> Chats()
+            }
         }
-
     }
-
 
 }
